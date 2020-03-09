@@ -104,7 +104,10 @@ I was finaly to deploy to Glitch by using the correct url (https://themiscadiz-a
 <!-- References for resources and inspiration -->
 ## References
 **Class Material**
+
 [simple-express-api - A simple frontend and static web server](https://github.com/joeyklee/simple-express-api) by [Joey Lee] (https://github.com/joeyklee)
+
+
 [Introducing Postman](https://github.com/joeyklee/simple-express-api#introducing-postman) by [Joey Lee] (https://github.com/joeyklee)
 
 **Online References**
