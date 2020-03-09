@@ -1,14 +1,14 @@
 <!-- Every README should start with an H1 -->
 # Assignment5 - Using NEDB 
 <!-- A one sentence description of the project or assignment -->
-This assignment is a continuation of assignment 4. A voting system for animals.Instead of using a saved JSON file, I implemented a database with NEDB. Following Joey's simple express API [tutorial](https://github.com/joeyklee/simple-express-api).
+This assignment is a continuation of assignment 4. A voting system for animals. Instead of using a saved JSON file, I implemented a database with NEDB, following Joey's simple express API [tutorial](https://github.com/joeyklee/simple-express-api).
 
 Still only one option, the cat.
 
-I intend to add more animals for the final version, and submit that as my final project for this course.
+**I intend to add more animals for the final version, and submit that as my final project for this course.**
 
 
-![img1]()
+![img1](https://github.com/themiscadiz/Assignment5/blob/master/images/12.png?raw=true)
 
 <!-- It is good practice to add an about or summary -->
 
@@ -56,41 +56,42 @@ To locally host your website (in case of Mac):
 # Notes & Process
 My goal in thi assignment was to use NEDB, Postman, and how to use PUT correctly.
 
-I started by following Joey's Simple Express API tutorial to understand the process of switching over from JSON to the NEDB database. The tutorial was good to follow and I was able to use CRUD correctly. 
-
-I was very interested in using p5.js for the frontend, since I am familiar with it.
+I started by following Joey's Simple Express API tutorial to understand the process of switching over from JSON to the NEDB database. The tutorial was good to follow and I was able to use CRUD correctly. Also, I was very interested in using p5.js for the frontend, since I am familiar with it.
 
 After doing this tutorial, I decided to use NEDB instead of MongoDB, it seemed easier for me right now. Hopefully later I'll be able to use MongoDB.
 
-![img]()
+![img](https://github.com/themiscadiz/Assignment5/blob/master/images/1.png?raw=true)
 
-I was able to implement the NEDB database into my own code from last week's assignment. Although, I had a lot of difficulty interfacing with the frontend. I think becuase if the async issue. I tried to access the DB and send the votes to the html but my getVotes function returned **unidentified**. I finally got it to work, but I'm still not exactly sure how. But I'm planning to return to this code to figure it out.
+I was able to implement the NEDB database into my own code from last week's assignment. Although, I had a lot of difficulty interfacing with the frontend, I think because an async issue. I tried to access the DB and send the votes to the html but my getVotes function returned **unidentified**. I finally got it to work, but I'm still not exactly sure how. **I'm planning to return to this code to figure it out.**
 
 I also left a ton of commented out code. I haven't deleted it because there might be something useful there still. Will clean later.
 
 ### NEDB and Postman
 It was actually pretty simple to implement. Following the tutorial was very useful. Using Postman helped me quickly test my code, instead of using the terminal of writing more code just for testing.
-![img]()
+![img](https://github.com/themiscadiz/Assignment5/blob/master/images/3.png?raw=true)
+
+![img](https://github.com/themiscadiz/Assignment5/blob/master/images/8.png?raw=true) 
 
 
-### implementing PUT
+### Implementing PUT
 For last week's assignment, I had trouble implementing PUT, but using the tutorial and Postman I was able to update my database with no problem.
+![img](https://github.com/themiscadiz/Assignment5/blob/master/images/9.png?raw=true)
 
 ### Getting data from the DB, Async and promise
 I had a lot of trouble getting the data into local variables in my app.js file. I think it has something to do with the async functions, await and promises. When I called the function to get the data it first returned as unidentified, then I thought to turn my getVotes() function into an async and use await, but I got errors. 
 
 I'm not sure but I think I'm calling the database directly from the html? This part is still very confusing for me but I will continue to work on it for my final project.
 
-![img]()
+![img](https://github.com/themiscadiz/Assignment5/blob/master/images/2.gif?raw=true)
+To sea a detail video [click here](https://github.com/themiscadiz/Assignment5/blob/master/images/Weird-db-frontend-working.mov?raw=true)
 
 
 ### Deploying to Glitch
 I was finaly to deploy to Glitch by using the correct url (https://themiscadiz-assignment5.glitch.me/) instead of localhost://
 
-![img]()
+![img](https://github.com/themiscadiz/Assignment5/blob/master/images/1.gif?raw=true)
 
-![img]()
-
+![img](https://github.com/themiscadiz/Assignment5/blob/master/images/13.png?raw=true)
 
 
 
@@ -100,15 +101,15 @@ I was finaly to deploy to Glitch by using the correct url (https://themiscadiz-a
 
 <!-- References for resources and inspiration -->
 ## References
-
+**Class Material**
 [simple-express-api - A simple frontend and static web server](https://github.com/joeyklee/simple-express-api) by [Joey Lee] (https://github.com/joeyklee)
 [Introducing Postman](https://github.com/joeyklee/simple-express-api#introducing-postman) by [Joey Lee] (https://github.com/joeyklee)
 
+**Online References**
 [MDN await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
 
 Cat picture from [Unspash](https://unsplash.com/s/photos/cat)
 
-Class Material
 
 ## Authors
 * [Themis Garcia](https://github.com/themiscadiz) -- NYU ITP student
