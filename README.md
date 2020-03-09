@@ -68,65 +68,24 @@ I was able to implement the NEDB database into my own code from last week's assi
 
 I also left a ton of commented out code. I haven't deleted it because there might be something useful there still. Will clean later.
 
-### Understanding NEDB
-Following the Foundations Guide from the class, I was able to  understand how to interact with node through the terminal.
-
-![img]()
-
-In my first attempt, I started to use the Horoscope.js. But while I was diving into the material, I noticed that I actually wasn't going to explore the fundamentals concepts of this assignment. 
-
-![img]()
-
-However, when I tried to start the assignment I realized I needed help understanding how to interact with node.js, it is not the typical way I have used js... after that, I understood it more as an invisible, backend that I was only able to see it running in the terminal. Not as a console log on the browser.
-
-### Designing the website
-After I finally got the concept of the assignment. I started to design my website and decided to start with the frontend. I sketched the design. After simplifying, I eliminated the other animals, to focus on the basic functionailty.
-
-![img]()
-
-### Creating an API
-Creating the API was the most time consumming part of the assignment. Even having the class material, it was hard for me to understand how to apply it into my own project. The challenges starting for even understanding were node runs and what libraries I needed to get the data.
-![img]()
-
-Another challenge was to access the frontend files. I tried to use <code> const indexLocation = path.join(__dirname + "/frontend/")</code> but didn't work as espected. I had to put the css and js code inside the html file to be readable.
-
-From the beggining I was confused how to get the path to read the api numbers that I was putting from the server. For this I follow a Express website example using .Router()
-
-![img]()
-
-However, after many attempts a was able to listen and see through the terminal the increasing value from the api/cat.
-
+### NEDB and Postman
+It was actually pretty simple to implement. Following the tutorial was very useful. Using Postman helped me quickly test my code, instead of using the terminal of writing more code just for testing.
 ![img]()
 
 
-### Accesing the API
+### implementing PUT
+For last week's assignment, I had trouble implementing PUT, but using the tutorial and Postman I was able to update my database with no problem.
 
-After I was able to see the information updating in the server from the app.js, I started to try to acces this information from the API (as last week assignment). Although I had difficulties I felt more confortable with the similarities from last week's assignment. 
+### Getting data from the DB, Async and promise
+I had a lot of trouble getting the data into local variables in my app.js file. I think it has something to do with the async functions, await and promises. When I called the function to get the data it first returned as unidentified, then I thought to turn my getVotes() function into an async and use await, but I got errors. 
 
-![img]()
-
-I was able to see the information updating in the website even when I refresh the site. However, when I close the server, the counter of votes started from 0, because I was not storing the information anywhere. Is because of this the importance of having a json database, to be able to store the information even if the server closes. 
-
-### JSON database
-
-I created the json file (votes.json) to put the votes information and I prepopulated with a json object. In app.js I created a function with fs.library to acces the json file. In that way, I was able to read the json file and write to it using those functions.
-
-In the function getVotes() I read the json file and return the votes value.
-
-In function updateVotes() I updated the cat variable, I created a new json object with the updated cat variable. And then I overwrite the object in the json file.
-
-To updated the cat variable with the last value of votes from the json file.
-<code> let cat = getVotes();</code>
-
-**In this gif I recorded when the json file is been updated by the backend when I clicked the image. Even if I refresh the website and the server, the counter of votes is going to show the quantity of votes accumulated.** It's simple but I'm SUPER PROUD of this.
+I'm not sure but I think I'm calling the database directly from the html? This part is still very confusing for me but I will continue to work on it for my final project.
 
 ![img]()
-
-To see in better resolution, here's is a [link to a video]() 
 
 
 ### Deploying to Glitch
-I wasn't really able to deploy the assigment through Glitch. I tried change the http to https (and vice versa) and make sure that I was using <code> start: node app.js</code> in the package.json, but it still didn't work. However, when I still have the server on locally on my computer, I see changes in the json file when I pressed through the Glitch site. I was able to find and open the terminal in Glitch, but wasnt able to understand the errors that I recieved.
+I was finaly to deploy to Glitch by using the correct url (https://themiscadiz-assignment5.glitch.me/) instead of localhost://
 
 ![img]()
 
@@ -136,10 +95,8 @@ I wasn't really able to deploy the assigment through Glitch. I tried change the 
 
 
 ## Challenges, Struggles & Questions
-1. Understanding the nature of backend, node, and how to work with it.
-2. How to request the information of different votes from different animals? Do I have to use an async function in the <script> for each animal?
-3. Deployment of website in Glitch
- 
+1. Getting data from the DB and storing it in a variable.
+2. Async function maybe?
 
 <!-- References for resources and inspiration -->
 ## References
