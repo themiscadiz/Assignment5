@@ -18,29 +18,51 @@ app.get('/', function(req, res) {
     res.sendFile(indexLocation)
 })
 
+
+////////
+
+let temp = 0;
+
+
+////
+
 // database 
 function getVotes(){
-    const contents = fs.readFileSync(path.join(__dirname, "./db/votes.json"));
-    const obj = JSON.parse(contents);
-    return obj.votes;
+    // const contents = fs.readFileSync(path.join(__dirname, "./db/votes.json"));
+    // const obj = JSON.parse(contents);
+    // return obj.votes;
+
+    db.find({}, function (err, docs) {
+        if(err){
+            return err;
+        } 
+
+        console.log(docs[0].votes);
+
+        // like before we send the json response
+        temp = JSON.stringify(docs[0].votes)
+        return temp;
+    });
+
+
 }
 
 function updateVotes(){
     cat++;
 
-    const contents = {"votes":cat}
+    // const contents = {"votes":cat}
 
-    fs.writeFile(path.join(__dirname, "./db/votes.json"), JSON.stringify(contents), (err) => {
-        if(err){
-          return console.error(err)
-        } 
-        //resolve(content);
-    });
+    // fs.writeFile(path.join(__dirname, "./db/votes.json"), JSON.stringify(contents), (err) => {
+    //     if(err){
+    //       return console.error(err)
+    //     } 
+    //     //resolve(content);
+    // });
 
-    // const obj = JSON.parse(contents);
-    // return obj.votes;
+    // // const obj = JSON.parse(contents);
+    // // return obj.votes;
 
-    console.log(cat);
+    // console.log(cat);
 
 }
 
@@ -91,8 +113,19 @@ app.post("/api", (request, response) => {
 
 // PUT - /api
 app.put("/api/:id", (request, response)=> {
+    updateVotes();  
+
+    cat = getVotes();
+
+    // Send cat value to the frontend
+    // res.json(
+    //     {message: cat}
+    // )
+
+
     // we get the id of the item we want from request.params.id ==> this matches the :id of the URL parameter
     const selectedItemId = request.params.id;
+
     const updatedDataProperties = request.body
 
     
@@ -101,8 +134,11 @@ app.put("/api/:id", (request, response)=> {
        if(err){
            response.status(404).send("uh oh! something went wrong on update");
        }
-        // redirect to "GET" all the latest data
-        response.redirect("/api")
+        // // redirect to "GET" all the latest data
+        // response.redirect("/api")
+        response.json(
+            {message: cat}
+        )
    });
 
 });
@@ -118,6 +154,9 @@ app.put("/api/:id", (request, response)=> {
 //         {message: cat}
 //     )
 // })
-let cat = getVotes();
+// let cat = getVotes();
+getVotes()
+console.log(temp)
+
 // Server start
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

@@ -115,17 +115,28 @@
         window.addEventListener('DOMContentLoaded', async () => {
 
             
-        let showVotes = false;
+        let showVotes = true;
         let voteCat = true; 
         let catCount = 0;
 
         ///
-        const specialUrlCat = "http://localhost:3000/api/cat"
+        const specialUrlCat = "http://localhost:3000/api/IMj2Pzek0JL5VRJi"
 
         // define a custom function to wrap your await
         async function mySpecialRequest(url){
             try{
-                const data = await fetch(url);
+              catCount++;
+              const options = {
+                method: 'PUT',
+                headers: {
+                  "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                  "votes" : catCount
+                })
+              }
+
+                const data = await fetch(url,options);
                 const result = await data.json();
 
                 getVotes(result);
