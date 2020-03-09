@@ -16,38 +16,36 @@ app.use(express.urlencoded({extended:true})); // to support URL-encoded bodies
 // Animales.com
 app.get('/', function(req, res) {
     res.sendFile(indexLocation)
-})
+});
 
+let cat = 0;
 
-////////
-
-let temp = 0;
-
-
-////
 
 // database 
-function getVotes(){
+async function getVotes(){
     // const contents = fs.readFileSync(path.join(__dirname, "./db/votes.json"));
     // const obj = JSON.parse(contents);
     // return obj.votes;
 
-    db.find({}, function (err, docs) {
+    db.find({},  function (err, docs) {
         if(err){
             return err;
         } 
 
-        console.log(docs[0].votes);
+        //console.log(docs[0].votes);
+
+        // let x = docs[0].votes;
 
         // like before we send the json response
-        temp = JSON.stringify(docs[0].votes)
-        return temp;
+        return  docs[0].votes;
     });
+
 
 
 }
 
-function updateVotes(){
+
+async function updateVotes(){
     cat++;
 
     // const contents = {"votes":cat}
@@ -115,7 +113,7 @@ app.post("/api", (request, response) => {
 app.put("/api/:id", (request, response)=> {
     updateVotes();  
 
-    cat = getVotes();
+    //cat = getVotes();
 
     // Send cat value to the frontend
     // res.json(
@@ -136,10 +134,11 @@ app.put("/api/:id", (request, response)=> {
        }
         // // redirect to "GET" all the latest data
         // response.redirect("/api")
-        response.json(
-            {message: cat}
-        )
+        
    });
+   response.json(
+    {message: cat}
+)
 
 });
 
@@ -154,9 +153,10 @@ app.put("/api/:id", (request, response)=> {
 //         {message: cat}
 //     )
 // })
-// let cat = getVotes();
-getVotes()
-console.log(temp)
+
+// cat = getVotes();
+
+// console.log(cat)
 
 // Server start
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
