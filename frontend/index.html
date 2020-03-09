@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- <link rel="stylesheet" type="text/css" href="./frontend/main.css" >
+    <script src="./frontend/file.js"></script> -->
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300);
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+      * {
+        padding: 0 0 0 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 16px;
+      }
+      body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: rgb(206, 203, 202);
+        text-align: center;
+
+      }
+
+      h1{
+        font-size:4rem;
+        padding: 3rem;
+
+      }
+
+
+      h2{
+        font-size:2rem;
+        padding: 1rem;
+      }
+
+      p{
+        font-size:1.5rem;
+        padding-bottom: 4rem;  
+      }
+
+
+      #animals {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0rem 0rem 0rem 0rem;
+        height: 55vh;
+        width: auto;
+      }
+
+      @media screen and (max-width: 700px) {
+        #animals {
+            flex-direction: column;
+            height: auto;
+        }
+      }
+
+      #cat {
+        font-size:2rem;
+        width: 50%;
+
+        position: relative;
+        /* height:45vh ; */
+        /* width: auto;          */
+    }
+
+    #cat:hover {
+        /* height:55vh ;      */
+        width: 60%;
+    }
+    @media screen and (max-width: 700px) {
+        #cat  {
+        width: 90%;
+        padding: 0px;
+        /* height: auto; */
+      }
+    }
+
+    #info {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0rem 0rem 0rem 0rem;
+        height: 10vh;
+        width: auto;
+      }
+
+      @media screen and (max-width: 700px) {
+        #info {
+            flex-direction: column;
+            height: auto;
+        }
+      }
+
+      #cat__info {
+        font-size:2rem;
+        /* width: 15%; */
+        padding:2rem;
+  
+        /* position: relative; */
+      }
+      ul {
+        list-style-type: none;
+        }
+          #line {
+              padding: 4rem;
+          }
+   
+    </style>
+        
+    <script>
+
+        window.addEventListener('DOMContentLoaded', async () => {
+
+            
+        let showVotes = false;
+        let voteCat = true; 
+        let catCount = 0;
+
+        ///
+        const specialUrlCat = "http://localhost:3000/api/cat"
+
+        // define a custom function to wrap your await
+        async function mySpecialRequest(url){
+            try{
+                const data = await fetch(url);
+                const result = await data.json();
+
+                getVotes(result);
+
+            } catch(err){
+                return err;
+            }  
+        }
+        async function getVotes(result){
+            console.log(result.message);
+            catCount = result.message;
+
+            showVotes = true; 
+            showAllVotes(showVotes); 
+        
+        }
+
+        document.getElementById("cat").addEventListener("click", function addVoteCat(){
+            
+            if(voteCat){
+                mySpecialRequest(specialUrlCat)
+            }
+        });
+
+        async function showAllVotes(showVotes){
+        if(showVotes){
+            document.getElementById("catNum").innerHTML = catCount;
+                }
+            }
+})
+
+    </script>
+
+    <title>What's Your Favorite Animal?</title>
+  </head>
+  <body>
+    <h1>What's Your Favorite Animal?</h1>
+    <p>Click on your favorite animal and we'll tell you how popular it is!</p>
+    <section id = "animals">
+        <div >
+            <input type="image" id="cat" alt="Cat" value="animal_1"
+       src="https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
+        </div>
+    </section>
+    <section>
+        <h2>How many votes it has?</h2>
+    </section>
+
+    <section id = "info">
+        <div id = cat__info>
+            <ul>
+                <li>Cats</li>
+                <li id = catNum value="1"></li>
+            </ul>
+        </div>
+    </section>
+
+    <div id = line >
+        <hr />
+    </div> 
+    <footer>
+        <p>Images from <a href="https://unsplash.com/">Unsplash</a></p>
+    </footer>
+  </body>
+</html>
