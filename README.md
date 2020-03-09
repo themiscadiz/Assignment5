@@ -83,7 +83,9 @@ I had a lot of trouble getting the data into local variables in my app.js file. 
 I'm not sure but I think I'm calling the database directly from the html? This part is still very confusing for me but I will continue to work on it for my final project.
 
 ![img](https://github.com/themiscadiz/Assignment5/blob/master/images/2.gif?raw=true)
-To sea a detail video [click here](https://github.com/themiscadiz/Assignment5/blob/master/images/Weird-db-frontend-working.mov?raw=true)
+
+To see a detail video:
+[click here](https://github.com/themiscadiz/Assignment5/blob/master/images/Weird-db-frontend-working.mov?raw=true)
 
 
 ### Deploying to Glitch
