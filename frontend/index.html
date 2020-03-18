@@ -41,17 +41,17 @@
       }
 
 
-      #animals {
+      .animals {
         display: flex;
         flex-direction: row;
         justify-content: center;
         padding: 0rem 0rem 0rem 0rem;
         height: 55vh;
-        width: auto;
+        width: 100%;
       }
 
       @media screen and (max-width: 700px) {
-        #animals {
+        .animals {
             flex-direction: column;
             height: auto;
         }
@@ -59,7 +59,7 @@
 
       #cat {
         font-size:2rem;
-        width: 50%;
+        width: 40%;
 
         position: relative;
         /* height:45vh ; */
@@ -68,7 +68,7 @@
 
     #cat:hover {
         /* height:55vh ;      */
-        width: 60%;
+        width: 50%;
     }
     @media screen and (max-width: 700px) {
         #cat  {
@@ -107,9 +107,66 @@
           #line {
               padding: 4rem;
           }
+
+
+
+
+
+          /*////////////////////////////////////////*/
+
+        #dog {
+        font-size:2rem;
+        width: 40%;
+
+        position: relative;
+        /* height:45vh ; */
+        width: 40%;         
+    }
+
+    #dog:hover {
+        /* height:55vh ;      */
+        width: 50%;
+    }
+    @media screen and (max-width: 700px) {
+        #dog  {
+        width: 90%;
+        padding: 0px;
+        /* height: auto; */
+      }
+    }
+
+    #info2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0rem 0rem 0rem 0rem;
+        height: 10vh;
+        width: auto;
+      }
+
+      @media screen and (max-width: 700px) {
+        #info2 {
+            flex-direction: column;
+            height: auto;
+        }
+      }
+
+      #dog__info {
+        font-size:2rem;
+        /* width: 15%; */
+        padding:2rem;
+  
+        position: relative;
+      }
    
     </style>
         
+
+        <!-- //////////////////////////////////////// -->
+
+
+
+
     <script>
 
         window.addEventListener('DOMContentLoaded', async () => {
@@ -119,13 +176,66 @@
         let voteCat = true; 
         let catCount = 0;
 
+
+        let voteDog = true; 
+        let dogCount = 0;
+
+        // GET function
+        async function loadGet(){
+          console.log("running loadGet")
+
+
+          // ????
+          var myHeaders = new Headers();
+          myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+          var urlencoded = new URLSearchParams();
+          urlencoded.append("animal", "dog");
+          urlencoded.append("votes", "0");
+
+          var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            // body: urlencoded,
+            redirect: 'follow'
+          };
+
+
+          const data = await fetch("http://localhost:3000/api/",requestOptions);
+          const result = await data.json();
+          console.log(result[0].votes);
+
+          catCount = result[0].votes;
+          dogCount = result[1].votes;
+          showAllVotes(showVotes)
+
+
+
+          // let data;
+          // fetch("http://localhost:3000/api/", requestOptions)
+          //   .then(response => response.text())
+          //   .then(
+          //     // result => console.log(result)
+          //     result => {
+          //       data = result;
+          //       console.log(data[0].votes);
+          //     }
+          //     //  data = result[0].body;
+          //     )
+          //   .catch(error => console.log('error', error));
+        }
+
+
         ///
         const specialUrlCat = "http://localhost:3000/api/IMj2Pzek0JL5VRJi"
 
+        const specialUrlDog = "http://localhost:3000/api/UVF6F5D2uclXTGrD"
+
         // define a custom function to wrap your await
-        async function mySpecialRequest(url){
+        async function mySpecialRequestCat(url){
             try{
               catCount++;
+
               const options = {
                 method: 'PUT',
                 headers: {
@@ -139,15 +249,54 @@
                 const data = await fetch(url,options);
                 const result = await data.json();
 
-                getVotes(result);
+                getVotesCat(result);
 
             } catch(err){
                 return err;
             }  
         }
-        async function getVotes(result){
-            console.log(result.message);
+
+  // define a custom function to wrap your await
+  async function mySpecialRequestDog(url){
+            try{
+              dogCount++;
+
+              const options = {
+                method: 'PUT',
+                headers: {
+                  "Content-Type":"application/json"
+                },
+                body:JSON.stringify({
+                  "votes" : dogCount
+                })
+              }
+
+                const data = await fetch(url,options);
+                const result = await data.json();
+
+                getVotesDog(result);
+
+            } catch(err){
+                return err;
+            }  
+        }
+
+
+
+
+        async function getVotesCat(result){
+            // console.log(result.message);
             catCount = result.message;
+
+            showVotes = true; 
+            showAllVotes(showVotes); 
+        
+        }
+
+
+        async function getVotesDog(result){
+            // console.log(result.message);
+            dogCount = result.message;
 
             showVotes = true; 
             showAllVotes(showVotes); 
@@ -157,16 +306,32 @@
         document.getElementById("cat").addEventListener("click", function addVoteCat(){
             
             if(voteCat){
-                mySpecialRequest(specialUrlCat)
+              mySpecialRequestCat(specialUrlCat)
+            }
+        });
+
+        document.getElementById("dog").addEventListener("click", function addVoteDog(){
+            
+            if(voteDog){  
+                mySpecialRequestDog(specialUrlDog)
             }
         });
 
         async function showAllVotes(showVotes){
-        if(showVotes){
-            document.getElementById("catNum").innerHTML = catCount;
-                }
-            }
-})
+          // if(showVotes){
+            // console.log(myData);
+              document.getElementById("catNum").innerHTML = catCount;
+              document.getElementById("dogNum").innerHTML = dogCount;
+          // }
+        }
+
+
+
+        loadGet()
+
+      })
+
+
 
     </script>
 
@@ -175,15 +340,23 @@
   <body>
     <h1>What's Your Favorite Animal?</h1>
     <p>Click on your favorite animal and we'll tell you how popular it is!</p>
-    <section id = "animals">
+    <section class = "animals">
         <div >
             <input type="image" id="cat" alt="Cat" value="animal_1"
        src="https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
         </div>
-    </section>
-    <section>
+    <!-- </section>
+
+    <section class = "animals2"> -->
+      <div >
+          <input type="image" id="dog" alt="Dog" value="animal_2"
+     src="https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
+      </div>
+  </section>
+
+  <section>
         <h2>How many votes it has?</h2>
-    </section>
+  </section>
 
     <section id = "info">
         <div id = cat__info>
@@ -193,6 +366,15 @@
             </ul>
         </div>
     </section>
+
+    <section id = "info2">
+      <div id = dog__info>
+          <ul>
+              <li>Dogs</li>
+              <li id = dogNum value="1"></li>
+          </ul>
+      </div>
+  </section>
 
     <div id = line >
         <hr />
